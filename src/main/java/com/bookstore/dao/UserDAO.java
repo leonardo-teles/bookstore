@@ -2,9 +2,15 @@ package com.bookstore.dao;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import com.bookstore.entity.User;
 
 public class UserDAO extends JpaDAO<User> implements GenericDAO<User> {
+	
+	public UserDAO(EntityManager em) {
+		super(em);
+	}
 
 	@Override
 	public User create(User user) {
@@ -12,9 +18,8 @@ public class UserDAO extends JpaDAO<User> implements GenericDAO<User> {
 	}
 	
 	@Override
-	public User update(User t) {
-		// TODO Auto-generated method stub
-		return null;
+	public User update(User user) {
+		return super.update(user);
 	}
 
 	@Override
