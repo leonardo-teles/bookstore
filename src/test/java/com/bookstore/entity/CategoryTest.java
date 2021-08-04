@@ -4,24 +4,23 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class UserTest {
+public class CategoryTest {
 
 	public static void main(String[] args) {
-		User user = new User();
-		user.setEmail("admin@email.com");
-		user.setFullname("Admin User");
-		user.setPassword("theboss");
+		Category category = new Category();
+		
+		category.setName("Advanced Java");
 		
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("bookstorePU");
 		EntityManager em = emf.createEntityManager();
 		
 		em.getTransaction().begin();
-		em.persist(user);
+		em.persist(category);
 		em.getTransaction().commit();
 		
 		em.close();
 		emf.close();
 		
-		System.out.println("The user was saved");
+		System.out.println("The category was saved");
 	}
 }
