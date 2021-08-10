@@ -7,10 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
+@NamedQueries({
+	@NamedQuery(name = "User.findAll",  query = "SELECT u FROM User u ORDER BY u.fullName"),
+	@NamedQuery(name = "User.countAll", query = "SELECT COUNT(*) FROM User u")
+})
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -22,16 +28,16 @@ public class User implements Serializable {
 	private String email;
 	
 	@Column(name = "full_name")
-	private String fullname;
+	private String fullName;
 	
 	private String password;
 	
 	public User() {}
 	
-	public User(Integer userId, String email, String fullname, String password) {
+	public User(Integer userId, String email, String fullName, String password) {
 		this.userId = userId;
 		this.email = email;
-		this.fullname = fullname;
+		this.fullName = fullName;
 		this.password = password;
 	}
 
@@ -51,12 +57,12 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	public String getFullname() {
-		return fullname;
+	public String getFullName() {
+		return fullName;
 	}
 
-	public void setFullname(String fullname) {
-		this.fullname = fullname;
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
 
 	public String getPassword() {

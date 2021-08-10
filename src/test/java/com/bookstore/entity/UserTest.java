@@ -9,7 +9,7 @@ public class UserTest {
 	public static void main(String[] args) {
 		User user = new User();
 		user.setEmail("admin@email.com");
-		user.setFullname("Admin User");
+		user.setFullName("Admin User");
 		user.setPassword("theboss");
 		
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("bookstorePU");
