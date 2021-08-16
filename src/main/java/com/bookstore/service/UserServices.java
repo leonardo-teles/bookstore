@@ -19,19 +19,31 @@ public class UserServices {
 	private EntityManagerFactory emf;
 	private EntityManager em;
 	private UserDAO dao;
+	private HttpServletRequest request;
+	private HttpServletResponse response;
 	
-	public UserServices() {
+	public UserServices(HttpServletRequest request, HttpServletResponse response) {
+		this.request = request;
+		this.response = response;
+		
 		emf = Persistence.createEntityManagerFactory("bookstorePU");
 		em = emf.createEntityManager();
 		
 		dao = new UserDAO(em);
 	}
 
-	public void listUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void listUser() throws ServletException, IOException {
+		listUser(null);
+	}
+	
+	public void listUser(String message) throws ServletException, IOException {
 		List<User> listUsers = dao.listAll();
 		
 		request.setAttribute("listUsers", listUsers);
-		request.setAttribute("message", "New User Created Successfully");
+		
+		if(message != null) {
+			request.setAttribute("message", message);
+		}
 		
 		String listPage = "user_list.jsp";
 		
@@ -40,7 +52,7 @@ public class UserServices {
 		
 	}
 	
-	public void createUser(HttpServletRequest request, HttpServletResponse response) {
+	public void createUser() {
 		
 		String email = request.getParameter("email");
 		String fullName = request.getParameter("fullName");
