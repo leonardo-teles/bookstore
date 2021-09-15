@@ -52,13 +52,27 @@ public class UserServices {
 		
 	}
 	
-	public void createUser() {
+	public void createUser() throws ServletException, IOException {
 		
 		String email = request.getParameter("email");
 		String fullName = request.getParameter("fullName");
 		String password = request.getParameter("password");
 		
-		User user = new User(email, fullName, password);
-		dao.create(user);
+		User existsUser = dao.findByEmail(email);
+		
+		if(existsUser != null) {
+			String message = "Could not create user. A user with email " + email + " already exists.";
+			
+			request.setAttribute("message", message);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("message.jsp");
+			dispatcher.forward(request, response);
+			
+		} else {
+			User user = new User(email, fullName, password);
+			dao.create(user);
+			listUser("New User Created Successfully");
+		}
+		
 	}
 }
