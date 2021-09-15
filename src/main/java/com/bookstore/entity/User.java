@@ -15,6 +15,7 @@ import javax.persistence.Table;
 @Table(name = "users")
 @NamedQueries({
 	@NamedQuery(name = "User.findAll",  query = "SELECT u FROM User u ORDER BY u.fullName"),
+	@NamedQuery(name = "User.findByEmail",  query = "SELECT u FROM User u WHERE u.email = :email"),
 	@NamedQuery(name = "User.countAll", query = "SELECT COUNT(*) FROM User u")
 })
 public class User implements Serializable {
